@@ -23,10 +23,10 @@ module Simpler
 
         return false if router_path_parts.size != request_path_parts.size
 
-        router_path_parts.each_with_index do |part, index| # 'tests' - 0   ':id' - 1
-          if part == ':id'
+        router_path_parts.each_with_index do |part, index| # |'tests', 0|, |':id', 1|
+          if part[0] == ':'
             @params = {}
-            @params[part] = request_path_parts[1] # { ':id' => '101' }
+            @params[part] = request_path_parts[0] # { ':id' => '101' }
           elsif part != request_path_parts[index]
             return false
           end
